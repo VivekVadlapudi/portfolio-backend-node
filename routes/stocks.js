@@ -97,5 +97,17 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+router.get('/', async (req, res) => {
+  try {
+    console.log('📥 GET /api/stocks hit');
+    const [rows] = await db.query('SELECT * FROM stock');
+    console.log('✅ DB result:', rows);
+    res.json(rows);
+  } catch (err) {
+    console.error('❌ DB ERROR:', err.message); // <-- Add this
+    res.status(500).json({ error: err.message });
+  }
+});
+
 
 module.exports = router;
