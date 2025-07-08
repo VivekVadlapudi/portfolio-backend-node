@@ -99,15 +99,16 @@ router.delete('/:id', async (req, res) => {
 });
 router.get('/', async (req, res) => {
   try {
-    console.log('📥 GET /api/stocks hit');
+    console.log('✅ /api/stocks hit');
     const [rows] = await db.query('SELECT * FROM stock');
-    console.log('✅ DB result:', rows);
+    console.log('✅ Fetched stocks:', rows);
     res.json(rows);
   } catch (err) {
-    console.error('❌ DB ERROR:', err.message); // <-- Add this
+    console.error('❌ DB Query Error:', err.message);
     res.status(500).json({ error: err.message });
   }
 });
+
 
 
 module.exports = router;
